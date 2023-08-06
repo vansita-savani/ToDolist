@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do App</title>
+    <style>
+        body{
+            background-color: black;
+            font-family: sans-serif;
+        }
+        .container{
+            max-width: 600px;
+            width: 100%;
+            padding: 0 15px;
+            margin-left: auto;
+            margin-right: auto;
+            align-items: center;
+        }
+
+        .content{
+            align-items:first baseline;
+            background-color:rgba(204, 136, 221, 0.952)
+        }
+        .head h1 {
+        color: #110b0b; 
+        font-size: 28px; 
+        font-weight: bold; 
+        text-align: center; 
+        margin-bottom: 20px;
+        }
+
+        .task {
+        display: flex; 
+        
+        font-size:17px;
+        }
+
+        .btnupdate {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color:rgb(232 186 233);
+        border: none;
+        border-radius: 5px;
+        font-size: 12px;
+        cursor: pointer;
+        }
+
+        .btndelete {
+        display: block; 
+        padding: 8px 12px;  
+        background-color:rgb(232 186 233);
+        border-radius: 4px; 
+        
+        }
+
+        button{
+            color:black;
+            border-radius:4px;
+            background-color:rgb(232 186 233);
+            padding:8px 11px ;
+        }
+
+        .add-btn{
+            padding-left: 13%;
+            padding: 8px 11px; 
+        }
+
+        .label{
+            align-items: center;
+            padding-left: 22%;
+            color:aquamarine;
+            margin: 11px;
+            font-size:18px
+        }
+        .input{
+            padding: 10px 12px;
+        }
+        a{
+            text-decoration: none;
+            color:black;
+        }
+
+        table{
+            margin: auto;
+        }
+        .id{
+            color:aquamarine;
+            font-size: 22px;
+            
+        }
+        .name{
+            color:aquamarine;
+            font-size: 22px;
+            padding:5px;
+        }
+        .not-done{
+            color:white;
+            background-color: rgb(175 95 175);
+            border-radius: 4px;
+            padding: 8px 12px;
+            font-size:12px;
+        }
+        .done{
+            color:white;
+            background-color: rgb(175 95 175);
+            border-radius: 4px;
+            padding: 8px 12px;
+            font-size:12px;
+        }
+        
+        
+    </style>       
+</head>
+<body>
+    <div class="content">
+        <div class="head">
+            <h1>To Do List</h1>
+        </div>
+    </div>
+    <div class="container">
+        <form action="/add" method="post">
+            <div class="task">
+                <div class="label">
+                    Enter The Task  :  
+                </div>
+                <div class="input">
+                    <input type="text" name="name">
+                </div>
+                <div class="add-btn">
+                    <button type="submit">Add Task</button>
+                </div>
+            </div>
+        </form>
+
+        <table>
+            <tbody>
+                {% for todo in todo_list %}
+                <tr>
+                    <td class="id">{{ todo.task_id }}</td>
+                    <td class="name">{{ todo.name }}</td>
+                    {% if todo.done == False %}
+                    <td class=" not-done">Not Done</td>
+                    {% else %}
+                    <td class="done">Done</td>
+                    {% endif %}
+                    <td><button class="btnupdate"><a href="/update/{{ todo.task_id }}">Update</a></td></button>
+                    <td><button class="btndelete"><a href="/delete/{{ todo.task_id }}">Delete</a></td></button>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
